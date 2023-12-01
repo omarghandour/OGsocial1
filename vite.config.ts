@@ -11,7 +11,7 @@ export default defineConfig({
         theme_color: '#ffffff',
         icons: [
           {
-            src: '/public/assets/icons/image.png',
+            src: '/assets/icons/image.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable',
