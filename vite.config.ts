@@ -17,6 +17,15 @@ export default defineConfig({
             purpose: 'any maskable',
           },
         ],
+        start_url: '/',
+        display: 'standalone',
+        background_color: '#ffffff',
+        scope: '/',
+        description: 'Social media app',
+        
+          
+
+          
       },
       registerType: 'autoUpdate',
       devOptions: {
