@@ -78,6 +78,7 @@ const PostDetails = () => {
                   </p>
                   <div className="flex-center gap-2 text-light-3">
                     <p className="subtle-semibold lg:small-regular ">
+                      {/* {post?.$updatedAt ? multiFormatDateString(post?.$updatedAt) : multiFormatDateString(post?.$createdAt)} */}
                       {multiFormatDateString(post?.$createdAt)}
                     </p>
                     •
@@ -128,9 +129,12 @@ const PostDetails = () => {
                     #{tag}
                   </li>
                 ))}
+                
               </ul>
+             
+              
             </div>
-
+                
             <div className="w-full">
               <PostStats post={post} userId={user.id} />
             </div>
