@@ -12,6 +12,7 @@ const updateSW = registerSW({
   onNeedRefresh() {},
   onOfflineReady() {},
 })
+updateSW();
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
