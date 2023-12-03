@@ -99,7 +99,7 @@ const likesUsers = () => {
         <p onClick={likesUsers} className="small-medium lg:base-medium cursor-pointer">{likes.length}</p>
         
       </div>
-      {Lik ? <div className="relative"><LikesInfo so={tree} userId={""}/></div> : null }
+      {Lik ? <div className="relative cursor-pointer" onClick={likesUsers}>X<LikesInfo so={tree} userId={""}/></div> : null }
       <div className="flex gap-2">
         <img
           src={isSaved ? "/assets/icons/saved.svg" : "/assets/icons/save.svg"}

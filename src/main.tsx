@@ -6,7 +6,12 @@ import { AuthProvider } from "@/context/AuthContext";
 import { QueryProvider } from "@/lib/react-query/QueryProvider";
 
 import App from "./App";
+import { registerSW } from 'virtual:pwa-register'
 
+const updateSW = registerSW({
+  onNeedRefresh() {},
+  onOfflineReady() {},
+})
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
