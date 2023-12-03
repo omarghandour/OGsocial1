@@ -33,18 +33,18 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
-        // runtimeCaching: [
-        //   {
-        //     urlPattern: ({ url }) => {
-        //       return url.pathname.startsWith('/');
-        //     },
-        //     handler: 'NetworkFirst' as const,
-        //     options: {
-        //       cacheName: 'home-cache',
-        //       cacheableResponse: { statuses: [0, 200] },
-        //     },
-        //   },
-        // ],
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) => {
+              return url.pathname.startsWith('/');
+            },
+            handler: 'NetworkFirst' as const,
+            options: {
+              cacheName: 'home-cache',
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+        ],
       },
     }),
   ],

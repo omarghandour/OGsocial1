@@ -31,9 +31,11 @@ const Explore = () => {
   const debouncedSearch = useDebounce(searchValue, 500);
   const { data: searchedPosts, isFetching: isSearchFetching } = useSearchPosts(debouncedSearch);
 
+
   useEffect(() => {
     if (inView && !searchValue) {
       fetchNextPage();
+      
     }
   }, [inView, searchValue]);
 
@@ -46,7 +48,8 @@ const Explore = () => {
 
   const shouldShowSearchResults = searchValue !== "";
   const shouldShowPosts = !shouldShowSearchResults && 
-    posts.pages.every((item) => item.documents.length === 0);
+    posts.pages.every((item) =>  item.documents.length === 0);
+
 
   return (
     <div className="explore-container">
