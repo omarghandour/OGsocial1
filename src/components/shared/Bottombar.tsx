@@ -5,7 +5,7 @@ import { bottombarLinks } from "@/constants";
 const Bottombar = () => {
   const { pathname } = useLocation();
 
-  return (
+  return ( 
     <section className="bottom-bar">
       {bottombarLinks.map((link) => {
         const isActive = pathname === link.route;

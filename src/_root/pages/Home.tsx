@@ -72,7 +72,7 @@ const Home = () => {
       ) : ''}
       </div>
 
-      <div className="home-creators">
+      <div  className="home-creators">
         <h3 className="h3-bold text-light-1">Top Creators</h3>
         {isUserLoading && !creators ? (
           <Loader />
