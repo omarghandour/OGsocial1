@@ -21,7 +21,7 @@ import "./globals.css";
 
 const App = () => {
   return (
-    <main className="flex">
+    <main className="flex mainee">
       <Routes>
         {/* public routes */}
         <Route element={<AuthLayout />}>
