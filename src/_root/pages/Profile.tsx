@@ -11,7 +11,7 @@ import { Button } from "@/components/ui";
 import { LikedPosts } from "@/_root/pages";
 import { useUserContext } from "@/context/AuthContext";
 import { useGetUserById } from "@/lib/react-query/queries";
-import { GridPostList, Loader } from "@/components/shared";
+import { GridPostList } from "@/components/shared";
 
 interface StabBlockProps {
   value: string | number;
@@ -32,12 +32,6 @@ const Profile = () => {
 
   const { data: currentUser } = useGetUserById(id || "");
 
-  if (!currentUser)
-    return (
-      <div className="flex-center w-full h-full">
-        <Loader />
-      </div>
-    );
 
   return (
     <div className="profile-container">
@@ -45,38 +39,38 @@ const Profile = () => {
         <div className="flex xl:flex-row flex-col max-xl:items-center flex-1 gap-7">
           <img
             src={
-              currentUser.imageUrl || "/assets/icons/profile-placeholder.svg"
+              currentUser?.imageUrl || "/assets/icons/profile-placeholder.svg"
             }
             alt="profile"
             className="w-28 h-28 lg:h-36 lg:w-36 rounded-full"
           />
           <div className="flex flex-col flex-1 justify-between md:mt-2">
             <div className="flex flex-col w-full">
-              <h1 className="text-center xl:text-left h3-bold md:h1-semibold w-full">
-                {currentUser.name}
+              <h1 className={currentUser ? "text-center xl:text-left h3-bold md:h1-semibold w-full" : "text-center xl:text-left h3-bold md:h1-semibold w-full"}>
+                {currentUser ? currentUser.name : "Loading..."}
               </h1>
               <p className="small-regular md:body-medium text-light-3 text-center xl:text-left">
-                @{currentUser.username}
+                @{currentUser?.username}
               </p>
             </div>
 
             <div className="flex gap-8 mt-10 items-center justify-center xl:justify-start flex-wrap z-20">
-              <StatBlock value={currentUser.posts.length} label="Posts" />
+              <StatBlock value={currentUser?.posts.length} label="Posts" />
               <StatBlock value={20} label="Followers" />
               <StatBlock value={20} label="Following" />
             </div>
 
             <p className="small-medium md:base-medium text-center xl:text-left mt-7 max-w-screen-sm">
-              {currentUser.bio}
+              {currentUser?.bio}
             </p>
           </div>
 
           <div className="flex justify-center gap-4">
-            <div className={`${user.id !== currentUser.$id && "hidden"}`}>
+            <div className={`${user.id !== currentUser?.$id && "hidden"}`}>
               <Link
-                to={`/update-profile/${currentUser.$id}`}
+                to={`/update-profile/${currentUser?.$id}`}
                 className={`h-12 bg-dark-4 px-5 text-light-1 flex-center gap-2 rounded-lg ${
-                  user.id !== currentUser.$id && "hidden"
+                  user.id !== currentUser?.$id && "hidden"
                 }`}>
                 <img
                   src={"/assets/icons/edit.svg"}
@@ -98,7 +92,7 @@ const Profile = () => {
         </div>
       </div>
 
-      {currentUser.$id === user.id && (
+      {currentUser?.$id === user.id && (
         <div className="flex max-w-5xl w-full">
           <Link
             to={`/profile/${id}`}
@@ -132,9 +126,9 @@ const Profile = () => {
       <Routes>
         <Route
           index
-          element={<GridPostList posts={currentUser.posts} showUser={false} />}
+          element={currentUser ? <GridPostList posts={currentUser?.posts} showUser={false} /> : null}
         />
-        {currentUser.$id === user.id && (
+        {currentUser?.$id === user.id && (
           <Route path="/liked-posts" element={<LikedPosts />} />
         )}
       </Routes>

@@ -1,8 +1,7 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui";
-import { Loader } from "@/components/shared";
-import { GridPostList, PostStats } from "@/components/shared";
+import { GridPostList, Loader, PostStats } from "@/components/shared";
 
 import {
   useGetPostById,
@@ -48,16 +47,17 @@ const PostDetails = () => {
           <p className="small-medium lg:base-medium">Back</p>
         </Button>
       </div>
-
-      {isLoading || !post ? (
-        <Loader />
-      ) : (
+      {/* {post ? ( */}
         <div className="post_details-card">
-          <img
-            src={post?.imageUrl}
-            alt="creator"
-            className="post_details-img"
-          />
+          {
+            isLoading ? <div 
+            className="post_details-img skeleton"
+          /> : <img
+          src={post?.imageUrl}
+          alt="creator"
+          className="post_details-img"
+        />
+          }
 
           <div className="post_details-info">
             <div className="flex-between w-full">
@@ -136,11 +136,11 @@ const PostDetails = () => {
             </div>
                 
             <div className="w-full">
-              <PostStats post={post} userId={user.id} />
+              { post ?<PostStats post={post} userId={user.id} /> : null}
             </div>
           </div>
         </div>
-      )}
+      {/* ) : null} */}
 
       <div className="w-full max-w-5xl">
         <hr className="border w-full border-dark-4/80" />
