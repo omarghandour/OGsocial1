@@ -5,6 +5,7 @@ import { Input } from "@/components/ui";
 import useDebounce from "@/hooks/useDebounce";
 import { GridPostList, Loader } from "@/components/shared";
 import { useGetPosts, useSearchPosts } from "@/lib/react-query/queries";
+import ExploreLoader from "@/components/shared/ExploreLoader";
 
 export type SearchResultProps = {
   isSearchFetching: boolean;
@@ -39,16 +40,16 @@ const Explore = () => {
     }
   }, [inView, searchValue]);
 
-  if (!posts)
-    return (
-      <div className="flex-center w-full h-full">
-        <Loader />
-      </div>
-    );
+  // if (!posts)
+  //   return (
+  //     <div className="flex-center w-full h-full">
+  //       <ExploreLoader />
+  //     </div>
+  //   );
 
   const shouldShowSearchResults = searchValue !== "";
   const shouldShowPosts = !shouldShowSearchResults && 
-    posts.pages.every((item) =>  item.documents.length === 0);
+    posts?.pages.every((item) =>  item.documents.length === 0);
 
 
   return (
@@ -97,11 +98,12 @@ const Explore = () => {
           />
         ) : shouldShowPosts ? (
           <p className="text-light-4 mt-10 text-center w-full">End of posts</p>
-        ) : (
-          posts.pages.map((item, index) => (
+        ) : posts ?  
+        (
+          posts?.pages.map((item, index) => (
             <GridPostList key={`page-${index}`} posts={item.documents} />
           ))
-        )}
+        ) : <ExploreLoader />}
       </div>
 
       {hasNextPage && !searchValue && (

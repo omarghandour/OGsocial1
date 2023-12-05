@@ -6,6 +6,7 @@ import { useGetPosts, useGetRecentPosts, useGetUsers } from "@/lib/react-query/q
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import InfinityHome from "@/components/shared/InfinityHome";
+import HomeLoader from "@/components/shared/HomeLoader";
 
 const Home = () => {
   const { data: posts, fetchNextPage, hasNextPage } = useGetPosts();
@@ -27,12 +28,12 @@ const Home = () => {
       fetchNextPage();
     }
   }, [inView]);
-  if (!posts)
-    return (
-      <div className="flex-center w-full h-full">
-        <Loader />
-      </div>
-    );
+  // if (!posts)
+  //   return (
+  //     <div className="flex-center w-full h-full">
+  //       <Loader />
+  //     </div>
+  //   );
   if (isErrorPosts || isErrorCreators) {
     return (
       <div className="flex flex-1">
@@ -46,7 +47,7 @@ const Home = () => {
     );
   }
   const shouldShowPosts = 
-     posts.pages.every((item) =>  item.documents.length === 0);
+     posts?.pages.every((item) =>  item.documents.length === 0);
     
   return (
     <div className="flex flex-1">
@@ -55,15 +56,15 @@ const Home = () => {
           <h2 className="h3-bold md:h2-bold text-left w-full">Home Feed</h2>
           {shouldShowPosts ? (
             <p className="text-light-4 mt-10 text-center w-full">End of posts</p>
-          ) :  
+          ) :  posts ?
           (
 
             <ul className="flex flex-col flex-1 gap-9 w-full ">
-              {posts.pages.map((item, index) => (
+              {posts?.pages.map((item, index) => (
             <InfinityHome key={`page-${index}`} posts={item.documents} />
           ))}
             </ul>
-          )}
+          ) : <HomeLoader />}
         </div>
         {hasNextPage ? (
         <div ref={ref} className="mt-10">
@@ -74,17 +75,18 @@ const Home = () => {
 
       <div  className="home-creators">
         <h3 className="h3-bold text-light-1">Top Creators</h3>
-        {isUserLoading && !creators ? (
+        {/* {isUserLoading && !creators ? (
           <Loader />
-        ) : (
-          <ul className="grid 2xl:grid-cols-2 gap-6">
+        ) :  */}
+        {/* ( */}
+          <ul className={isUserLoading ? "w-full skeleton h-[235.984px] rounded-[20px]" : "grid 2xl:grid-cols-2 gap-6"}>
             {creators?.documents.map((creator) => (
               <li key={creator?.$id}>
                 <UserCard user={creator} />
               </li>
             ))}
           </ul>
-        )}
+        {/* )} */}
       </div>
     </div>
   );
