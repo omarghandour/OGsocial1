@@ -79,7 +79,7 @@ const Home = () => {
           <Loader />
         ) :  */}
         {/* ( */}
-          <ul className={isUserLoading ? "w-full skeleton h-[235.984px] rounded-[20px]" : "grid 2xl:grid-cols-2 gap-6"}>
+          <ul className={isUserLoading ? "w-full skeleton h-[235.984px] rounded-[20px ]" : "grid 2xl:grid-cols-2 gap-6"}>
             {creators?.documents.map((creator) => (
               <li key={creator?.$id}>
                 <UserCard user={creator} />
