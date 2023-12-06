@@ -77,10 +77,10 @@ const PostDetails = () => {
                     {post?.creator.name}
                   </p>
                   <div className="flex-center gap-2 text-light-3">
-                    <p className="subtle-semibold lg:small-regular ">
+                    <div className="subtle-semibold lg:small-regular ">
                       {/* {post?.$updatedAt ? multiFormatDateString(post?.$updatedAt) : multiFormatDateString(post?.$createdAt)} */}
-                      {multiFormatDateString(post?.$createdAt)}
-                    </p>
+                      {isLoading ? <Loader /> : multiFormatDateString(post?.$createdAt)}
+                    </div>
                     •
                     <p className="subtle-semibold lg:small-regular">
                       {post?.location}

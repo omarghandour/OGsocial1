@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-
 import {
   Home,
   Explore,
@@ -18,7 +17,6 @@ import SigninForm from "@/_auth/forms/SigninForm";
 import { Toaster } from "@/components/ui/toaster";
 
 import "./globals.css";
-
 const App = () => {
   return (
     <main className="flex mainee">

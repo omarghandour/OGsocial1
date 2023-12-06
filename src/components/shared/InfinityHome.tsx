@@ -19,7 +19,7 @@ const GridPostList = ({
   return (
 <div className="flex flex-col gap-3">      
       {posts.map((post) => (
-         <div className="post-card">
+         <div key={post.$id} className="post-card">
          <div className="flex-between">
            <div className="flex items-center gap-3">
              <Link to={`/profile/${post.creator.$id}`}>
