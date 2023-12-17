@@ -182,10 +182,10 @@ export function getFilePreview(fileId: string) {
     const fileUrl = storage.getFilePreview(
       appwriteConfig.storageId,
       fileId,
-      2000,
-      2000,
-      "top",
-      100
+      1000,
+      1000,
+      "center",
+      70
     );
 
     if (!fileUrl) throw Error;
@@ -348,6 +348,63 @@ export async function deletePost(postId?: string, imageId?: string) {
   } catch (error) {
     console.log(error);
   }
+}
+// hhhhhhhhhh
+export async function followUser(userId: string, following: string[]){
+  try {
+    const user = await databases.getDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      userId,
+      // {
+      //   follows : following,
+      // }
+    );
+
+    if (!user) throw Error;
+
+    const updatedUser = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      userId,
+      {
+        following: [...following, user.$id],
+      }
+    );
+
+    if (!updatedUser) throw Error;
+
+    return updatedUser;
+  } catch (error) {
+    console.log(error);
+  } 
+}
+
+export async function unfollowUser(userId: string, following: string[]){
+  try {
+    const user = await databases.getDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      userId
+    );
+
+    if (!user) throw Error;
+
+    const updatedUser = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      userId,
+      {
+        following: following.filter((id) => id!== user.$id),
+      }
+    );
+
+    if (!updatedUser) throw Error;
+
+    return updatedUser;
+  } catch (error) {
+    console.log(error);
+  } 
 }
 
 // ============================== LIKE / UNLIKE POST

@@ -24,6 +24,7 @@ const GridPostList = ({
           <Link to={`/posts/${post.$id}`} className="grid-post_link">
             <img
               src={post.imageUrl}
+              loading="lazy"
               alt="post"
               className="h-full w-full object-cover"
             />

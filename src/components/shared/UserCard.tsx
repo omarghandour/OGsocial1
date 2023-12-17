@@ -2,10 +2,16 @@ import { Models } from "appwrite";
 import { Link } from "react-router-dom";
 
 import { Button } from "../ui/button";
+import { useState } from "react";
 
 type UserCardProps = {
   user: Models.Document;
 };
+
+// user.likes.map((user: Models.Document) => user.$id);
+
+// const [follow, setFollow] = useState<string[]>(); 
+// 1
 
 const UserCard = ({ user }: UserCardProps) => {
   return (
