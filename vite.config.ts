@@ -2,8 +2,28 @@ import path from 'path';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa'
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 export default defineConfig({
   plugins: [react(),
+    ViteImageOptimizer({
+      /* pass your config */
+      png: {
+        // https://sharp.pixelplumbing.com/api-output#png
+        quality: 50,
+      },
+      jpeg: {
+        // https://sharp.pixelplumbing.com/api-output#jpeg
+        quality: 50,
+      },
+      jpg: {
+        // https://sharp.pixelplumbing.com/api-output#jpeg
+        quality: 50,
+      },
+      tiff: {
+        // https://sharp.pixelplumbing.com/api-output#tiff
+        quality: 50,
+      },
+    }),
     VitePWA({
       manifest: {
         name: 'OG',
